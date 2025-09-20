@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bio Data Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+        <!-- School Logo - Replace with your hosted logo URL or local file path -->
+        <div class="flex justify-center mb-6">
+            <img src="C:\Users\QUESI\Desktop\biodata\1596196092-78-akim-oda-community-health-nurses-training-school.jpg" alt="CHNTs Training School Akim-Oda Logo" class="max-w-[200px] h-auto">
+        </div>
+        <h1 class="text-2xl font-bold text-center mb-6">Student Bio Data Form</h1>
+
+        <!-- Login Form (Shown initially) -->
+        <div id="loginForm" class="space-y-4">
+            <h2 class="text-lg font-semibold text-center">Student Login</h2>
+            <form id="loginFormElement" class="space-y-4">
+                <div>
+                    <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email (Username)</label>
+                    <input type="email" id="loginEmail" name="loginEmail" class="mt-1 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="loginStudentId" class="block text-sm font-medium text-gray-700">Student ID (Password)</label>
+                    <input type="text" id="loginStudentId" name="loginStudentId" class="mt-1 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Login</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Bio Data Form (Hidden until logged in) -->
+        <form id="bioDataForm" class="space-y-4 hidden">
+            <!-- Personal Details -->
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Personal Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <select id="gender" name="gender" class="mt-1 p-2 w-full border rounded-md" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
+                        <input type="text" id="nationality" name="nationality" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Details -->
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Academic Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="studentId" class="block text-sm font-medium text-gray-700">Student ID</label>
+                        <input type="text" id="studentId" name="studentId" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="course" class="block text-sm font-medium text-gray-700">Course/Program</label>
+                        <input type="text" id="course" name="course" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="yearOfStudy" class="block text-sm font-medium text-gray-700">Year of Study</label>
+                        <input type="number" id="yearOfStudy" name="yearOfStudy" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="institution" class="block text-sm font-medium text-gray-700">Institution Name</label>
+                        <input type="text" id="institution" name="institution" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parent/Guardian Details -->
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Parent/Guardian Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="parentName" class="block text-sm font-medium text-gray-700">Parent/Guardian Name</label>
+                        <input type="text" id="parentName" name="parentName" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="parentContact" class="block text-sm font-medium text-gray-700">Parent/Guardian Contact Number</label>
+                        <input type="tel" id="parentContact" name="parentContact" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="parentEmail" class="block text-sm font-medium text-gray-700">Parent/Guardian Email</label>
+                        <input type="email" id="parentEmail" name="parentEmail" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Details -->
+            <div>
+                <h2 class="text-lg font-semibold mb-2">Contact Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="mt-1 p-2 w-full border rounded-md" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700">Permanent Address</label>
+                        <textarea id="address" name="address" rows="4" class="mt-1 p-2 w-full border rounded-md" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+            </div>
+        </form>
+
+        <!-- View Saved Data Button -->
+        <div id="viewDataSection" class="text-center mt-4 hidden">
+            <button onclick="displayData()" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">View Saved Data</button>
+        </div>
+
+        <!-- Display Area for Saved Data -->
+        <div id="dataDisplay" class="mt-4 p-4 bg-gray-50 rounded-md hidden"></div>
+    </div>
+
+    <script>
+        // Check if already logged in on page load
+        const isLoggedIn = sessionStorage.getItem('studentLoggedIn');
+        if (isLoggedIn === 'true') {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('bioDataForm').classList.remove('hidden');
+            document.getElementById('viewDataSection').classList.remove('hidden');
+        }
+
+        // Handle login form submission
+        document.getElementById('loginFormElement').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const loginEmail = document.getElementById('loginEmail').value;
+            const loginStudentId = document.getElementById('loginStudentId').value;
+            const savedData = JSON.parse(localStorage.getItem('studentBioData') || '[]');
+
+            // Check if email already exists
+            const emailExists = savedData.some(entry => entry.email === loginEmail);
+            if (emailExists) {
+                alert('This email is already registered. Duplicate submissions are not allowed.');
+                return;
+            }
+
+            // For this demo, login is successful if fields are filled (in a real system, validate against a database)
+            if (loginEmail && loginStudentId) {
+                sessionStorage.setItem('studentLoggedIn', 'true');
+                sessionStorage.setItem('currentEmail', loginEmail);
+                sessionStorage.setItem('currentStudentId', loginStudentId);
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('bioDataForm').classList.remove('hidden');
+                document.getElementById('viewDataSection').classList.remove('hidden');
+                // Pre-fill email and student ID fields
+                document.getElementById('email').value = loginEmail;
+                document.getElementById('studentId').value = loginStudentId;
+            } else {
+                alert('Please fill in both email and student ID.');
+            }
+        });
+
+        // Handle bio data form submission
+        document.getElementById('bioDataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => { data[key] = value; });
+
+            // Retrieve existing data
+            let savedData = JSON.parse(localStorage.getItem('studentBioData') || '[]');
+            // Check for duplicate email
+            if (savedData.some(entry => entry.email === data.email)) {
+                alert('This email is already registered. Duplicate submissions are not allowed.');
+                return;
+            }
+
+            // Add new submission
+            savedData.push(data);
+            localStorage.setItem('studentBioData', JSON.stringify(savedData));
+            alert('Form data saved successfully!');
+            event.target.reset();
+        });
+
+        // Function to display saved data (only current user's data)
+        function displayData() {
+            const dataDisplay = document.getElementById('dataDisplay');
+            const savedData = JSON.parse(localStorage.getItem('studentBioData') || '[]');
+            const currentEmail = sessionStorage.getItem('currentEmail');
+
+            if (!currentEmail) {
+                dataDisplay.innerHTML = '<p class="text-gray-600">Please log in to view your data.</p>';
+            } else {
+                const userData = savedData.filter(entry => entry.email === currentEmail);
+                if (userData.length === 0) {
+                    dataDisplay.innerHTML = '<p class="text-gray-600">No data saved yet.</p>';
+                } else {
+                    let html = '<h3 class="text-lg font-semibold mb-2">Your Saved Data</h3>';
+                    userData.forEach((entry, index) => {
+                        html += `
+                            <div class="mb-4 p-4 border rounded-md">
+                                <h4 class="font-medium">Submission ${index + 1}</h4>
+                                <p><strong>Full Name:</strong> ${entry.fullName}</p>
+                                <p><strong>Date of Birth:</strong> ${entry.dateOfBirth}</p>
+                                <p><strong>Gender:</strong> ${entry.gender}</p>
+                                <p><strong>Nationality:</strong> ${entry.nationality}</p>
+                                <p><strong>Student ID:</strong> ${entry.studentId}</p>
+                                <p><strong>Course/Program:</strong> ${entry.course}</p>
+                                <p><strong>Year of Study:</strong> ${entry.yearOfStudy}</p>
+                                <p><strong>Institution:</strong> ${entry.institution}</p>
+                                <p><strong>Parent/Guardian Name:</strong> ${entry.parentName}</p>
+                                <p><strong>Parent/Guardian Contact:</strong> ${entry.parentContact}</p>
+                                <p><strong>Parent/Guardian Email:</strong> ${entry.parentEmail}</p>
+                                <p><strong>Email:</strong> ${entry.email}</p>
+                                <p><strong>Phone:</strong> ${entry.phone}</p>
+                                <p><strong>Address:</strong> ${entry.address}</p>
+                            </div>
+                        `;
+                    });
+                    dataDisplay.innerHTML = html;
+                }
+            }
+            dataDisplay.classList.remove('hidden');
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('studentLoggedIn');
+            sessionStorage.removeItem('currentEmail');
+            sessionStorage.removeItem('currentStudentId');
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('bioDataForm').classList.add('hidden');
+            document.getElementById('viewDataSection').classList.add('hidden');
+            document.getElementById('dataDisplay').classList.add('hidden');
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginStudentId').value = '';
+        }
+
+        // Add logout button after successful login
+        if (isLoggedIn === 'true') {
+            const logoutButton = document.createElement('button');
+            logoutButton.textContent = 'Logout';
+            logoutButton.className = 'ml-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600';
+            logoutButton.onclick = logout;
+            document.getElementById('viewDataSection').appendChild(logoutButton);
+        }
+    </script>
+</body>
+</html>

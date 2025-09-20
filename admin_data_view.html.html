@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Student Bio Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-5xl mx-auto">
+        <!-- School Logo -->
+        <div class="flex justify-center mb-6">
+            <img src="C:\Users\QUESI\Desktop\biodata\1596196092-78-akim-oda-community-health-nurses-training-school.jpg" alt="CHNTs Training School Akim-Oda Logo" class="max-w-[200px] h-auto">
+        </div>
+        <h1 class="text-2xl font-bold text-center mb-6">Admin - Student Bio Data</h1>
+
+        <!-- Login Form (Shown initially or after logout) -->
+        <div id="loginForm" class="space-y-4">
+            <h2 class="text-lg font-semibold text-center">Admin Login</h2>
+            <form id="loginFormElement" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" class="mt-1 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="mt-1 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Login</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Admin Content (Hidden until logged in) -->
+        <div id="adminContent" class="hidden">
+            <!-- Clear Data Button -->
+            <div class="text-center mb-4">
+                <button onclick="clearData()" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Clear All Data</button>
+                <a href="student_bio_data_form.html" class="ml-4 text-blue-500 hover:underline">Go to Student Form</a>
+                <button onclick="logout()" class="ml-4 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Logout</button>
+            </div>
+            
+            <!-- Data Table -->
+            <div class="overflow-x-auto">
+                <table id="dataTable" class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="border p-2 text-left">Full Name</th>
+                            <th class="border p-2 text-left">Date of Birth</th>
+                            <th class="border p-2 text-left">Gender</th>
+                            <th class="border p-2 text-left">Nationality</th>
+                            <th class="border p-2 text-left">Student ID</th>
+                            <th class="border p-2 text-left">Course</th>
+                            <th class="border p-2 text-left">Year of Study</th>
+                            <th class="border p-2 text-left">Institution</th>
+                            <th class="border p-2 text-left">Parent Name</th>
+                            <th class="border p-2 text-left">Parent Contact</th>
+                            <th class="border p-2 text-left">Parent Email</th>
+                            <th class="border p-2 text-left">Email</th>
+                            <th class="border p-2 text-left">Phone</th>
+                            <th class="border p-2 text-left">Address</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataBody"></tbody>
+                </table>
+            </div>
+            
+            <!-- No Data Message -->
+            <div id="noDataMessage" class="text-center text-gray-600 mt-4 hidden">No student data available.</div>
+        </div>
+    </div>
+
+    <script>
+        // Check if already logged in on page load
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('adminContent').classList.remove('hidden');
+            loadData();
+        }
+
+        // Handle login form submission
+        document.getElementById('loginFormElement').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Hardcoded credentials for demo purposes
+            if (username === 'admin' && password === 'password123') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('adminContent').classList.remove('hidden');
+                loadData();
+            } else {
+                alert('Invalid username or password. Please try again.');
+            }
+        });
+
+        // Function to load and display data
+        function loadData() {
+            const dataBody = document.getElementById('dataBody');
+            const noDataMessage = document.getElementById('noDataMessage');
+            const savedData = JSON.parse(localStorage.getItem('studentBioData') || '[]');
+            
+            if (savedData.length === 0) {
+                noDataMessage.classList.remove('hidden');
+                dataBody.innerHTML = '';
+                return;
+            }
+            
+            noDataMessage.classList.add('hidden');
+            let html = '';
+            savedData.forEach(entry => {
+                html += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="border p-2">${entry.fullName || ''}</td>
+                        <td class="border p-2">${entry.dateOfBirth || ''}</td>
+                        <td class="border p-2">${entry.gender || ''}</td>
+                        <td class="border p-2">${entry.nationality || ''}</td>
+                        <td class="border p-2">${entry.studentId || ''}</td>
+                        <td class="border p-2">${entry.course || ''}</td>
+                        <td class="border p-2">${entry.yearOfStudy || ''}</td>
+                        <td class="border p-2">${entry.institution || ''}</td>
+                        <td class="border p-2">${entry.parentName || ''}</td>
+                        <td class="border p-2">${entry.parentContact || ''}</td>
+                        <td class="border p-2">${entry.parentEmail || ''}</td>
+                        <td class="border p-2">${entry.email || ''}</td>
+                        <td class="border p-2">${entry.phone || ''}</td>
+                        <td class="border p-2">${entry.address || ''}</td>
+                    </tr>
+                `;
+            });
+            dataBody.innerHTML = html;
+        }
+
+        // Function to clear all data
+        function clearData() {
+            if (confirm('Are you sure you want to clear all student data? This action cannot be undone.')) {
+                localStorage.removeItem('studentBioData');
+                loadData();
+                alert('All data cleared successfully!');
+            }
+        }
+
+        // Function to logout
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('adminContent').classList.add('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+    </script>
+</body>
+</html>
